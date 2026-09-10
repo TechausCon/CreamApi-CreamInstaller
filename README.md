@@ -1,15 +1,10 @@
 ### CreamInstaller v5.0: Automatic DLC Unlocker Installer & Configuration Generator
 ---
-# 🙌 Support the Community
-If you would like to support the community and this project, consider making a donation: 
-
-[![Donate](https://img.shields.io/badge/Donate-Click%20Here-orange?style=for-the-badge&logo=paypal)](https://ubd.one/donate)
----
 # ⚠️ Disclaimer 
-## (Read before installation and Follow Us on Github !)
+## (Read before installation)
 
-> **This software is an open-source project developed for the community and is not affiliated with any organization or institution.**  
-> It is shared purely for **educational purposes**, software development testing, and to contribute to the growth of the open-source community.
+> **This software is an open-source fork** ([TechausCon/CreamApi-CreamInstaller](https://github.com/TechausCon/CreamApi-CreamInstaller))  
+> shared purely for **educational purposes**, software development testing, and open-source collaboration.
 
 ---
 
@@ -54,8 +49,7 @@ We strongly recommend purchasing and using professionally licensed software for 
 ---
 
 ### 🚨 Report Abuse
-If you encounter any abuse or misuse of this software, please report it to:  
-📧 **[abuse@ubden.com](mailto:abuse@ubden.com)**
+If you encounter any abuse or misuse of this software, please open a [security advisory](https://github.com/TechausCon/CreamApi-CreamInstaller/security/advisories/new) on GitHub.
 
 ---
 
@@ -87,10 +81,11 @@ games and DLCs the user selects; however, through the use of **right-click conte
 
 ---
 #### Installation:
-1. Download the latest release from [GitHub Releases](https://github.com/ubden/CreamApi-CreamInstaller/releases/latest).
-2. Extract `CreamInstaller.exe` to anywhere on your computer. *It's completely self-contained.*
+1. Download the latest release from [GitHub Releases](https://github.com/TechausCon/CreamApi-CreamInstaller/releases/latest).
+2. Extract `CreamInstaller.exe` to anywhere on your computer.
+3. Optional: verify `CreamInstaller.zip` against the published SHA-256 file on the release page.
 
-If the program doesn't launch, install the [.NET 9 Desktop Runtime (x64)](https://dotnet.microsoft.com/en-us/download/dotnet/9.0).
+The published EXE is a **framework-dependent single-file** build. Install the [.NET 9 Desktop Runtime (x64)](https://dotnet.microsoft.com/en-us/download/dotnet/9.0) if the program does not launch.
 
 ---
 #### Building from Source:
@@ -100,8 +95,15 @@ To build the project from source code, you need:
 
 **Note:** The application targets .NET 9. The `global.json` file uses `rollForward: latestMajor` for maximum SDK compatibility.
 
+```bash
+dotnet build CreamInstaller.sln -c Release
+dotnet test CreamInstaller.sln -c Release
+```
+
+Embedded third-party DLL hashes: `CreamInstaller/Resources/manifest.json` (see also `THIRD_PARTY.md`).
+
 ---
-#### **NOTE:** This program does not automatically download nor install actual DLC files for you. As the title of the program says, it's only a DLC Unlocker installer. Should the game you wish to unlock DLC for not already come with the DLCs installed (very many do not), you have to find, download, and install those yourself. Preferably, you should be referring to the proper cs.rin.ru post for the game(s) you're tinkering with; you'll usually find any answer to your problems there.
+#### **NOTE:** This program does not automatically download nor install actual DLC files for you. As the title of the program says, it's only a DLC Unlocker installer. Should the game you wish to unlock DLC for not already come with the DLCs installed (very many do not), you have to find, download, and install those yourself.
 
 ---
 #### Usage:
@@ -110,18 +112,18 @@ To build the project from source code, you need:
 3. Wait for the program to download and install SteamCMD (if you chose a Steam game). *Very fast, depends on internet speed.*
 4. Wait for the program to gather and cache the chosen games' information & DLCs. *May take a good amount of time on the first run, depends on how many games you chose and how many DLCs they have.*
 5. **CAREFULLY** select which games' DLCs you wish to unlock. *Obviously none of the DLC unlockers are tested for every single game!*
-6. Choose whether or not to install with Koaloader, and if so then also pick the proxy DLL to use. *If the default version.dll doesn't work, then see [here](https://forum.ubden.com.tr/konu/creaminstaller-auto-dlc-unlocker-installer-config-gen.1602/#google_vignette) to find one that does.*
+6. Choose whether or not to install with Koaloader, and if so then also pick the proxy DLL to use.
 7. Click the **Generate and Install** button.
 8. Click the **OK** button to close the program.
 9. If any of the DLC unlockers cause problems with any of the games you installed them on, simply go back to step 5 and select what games you wish you **revert** changes to, and instead click the **Uninstall** button this time.
 
 ---
 ##### Bugs/Crashes/Issues:
-For reliable and quick assistance, all bugs, crashes and other issues should be referred to the [GitHub Issues](https://github.com/ubden/CreamApi-CreamInstaller/issues) page!
+For reliable and quick assistance, all bugs, crashes and other issues should be referred to the [GitHub Issues](https://github.com/TechausCon/CreamApi-CreamInstaller/issues) page!
 
 > ⚠️ **No official support is provided.** For community help visit:
-> - [GitHub Discussions](https://github.com/ubden/CreamApi-CreamInstaller/discussions)
-> - [ubden Forum](https://forum.ubden.com.tr/konu/creaminstaller-auto-dlc-unlocker-installer-config-gen.1602/)
+> - [GitHub Discussions](https://github.com/TechausCon/CreamApi-CreamInstaller/discussions)
+> - [GitHub Issues](https://github.com/TechausCon/CreamApi-CreamInstaller/issues)
 
 ---
 

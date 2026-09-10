@@ -36,9 +36,6 @@ internal sealed partial class MainForm : CustomForm
 
     private List<(Platform platform, string id, string name)> programsToScan;
 
-    private const int SteamCmdTimeoutMs = 16000;
-    private const string DlcRefreshLogPrefix = "[DLCRefresh] ";
-
     private MainForm()
     {
         InitializeComponent();
@@ -125,21 +122,6 @@ internal sealed partial class MainForm : CustomForm
             _ = remainingDLCs.Remove(dlcId, out _);
             UpdateRemainingDLCs();
         });
-    }
-    private static async Task<T> WithTimeout<T>(Task<T> task, int millisecondsTimeout)
-    {
-        if (await Task.WhenAny(task, Task.Delay(millisecondsTimeout)) == task)
-            return await task;
-        return default;
-    }
-
-    private static async Task<string> ResolveSteamDlcName(string dlcId, string parentGameName = null, string parentGameId = null)
-    {
-        StoreAppData dlcStore = await SteamStore.QueryStoreAPI(dlcId, isDlc: true, attempts: 0, parentGameName, parentGameId);
-        if (dlcStore?.Name is not null)
-            return dlcStore.Name;
-        CmdAppData dlcCmd = await SteamCMD.GetAppInfo(dlcId);
-        return dlcCmd?.Common?.Name ?? "Unknown";
     }
     private async Task GetApplicablePrograms(IProgress<int> progress, bool uninstallAll = false)
     {
@@ -235,6 +217,10 @@ internal sealed partial class MainForm : CustomForm
                 AddToRemainingGames(name);
                 Task task = Task.Run(async () =>
                 {
+                    try
+                    {
+                        await ScanLimiter.RunGameAsync(async () =>
+                        {
                     if (Program.Canceled)
                         return;
                     HashSet<string> dllDirectories =
@@ -295,6 +281,10 @@ internal sealed partial class MainForm : CustomForm
                             AddToRemainingDLCs(dlcAppId);
                             Task task = Task.Run(async () =>
                             {
+                                try
+                                {
+                                    await ScanLimiter.RunDlcAsync(async () =>
+                                    {
                                 if (Program.Canceled)
                                     return;
                                 while (!Program.Canceled)
@@ -382,6 +372,12 @@ internal sealed partial class MainForm : CustomForm
                                 _dlc.Icon = dlcIcon;
                                 _ = dlc.TryAdd(_dlc, default);
                                 RemoveFromRemainingDLCs(dlcAppId);
+                                    }, Program.CancellationToken);
+                                }
+                                catch (OperationCanceledException)
+                                {
+                                    RemoveFromRemainingDLCs(dlcAppId);
+                                }
                             });
                             dlcTasks.Add(task);
                         }
@@ -450,6 +446,12 @@ internal sealed partial class MainForm : CustomForm
                     if (Program.Canceled)
                         return;
                     RemoveFromRemainingGames(name);
+                        }, Program.CancellationToken);
+                    }
+                    catch (OperationCanceledException)
+                    {
+                        RemoveFromRemainingGames(name);
+                    }
                 });
                 appTasks.Add(task);
             }
@@ -494,6 +496,10 @@ internal sealed partial class MainForm : CustomForm
                 AddToRemainingGames(name);
                 Task task = Task.Run(async () =>
                 {
+                    try
+                    {
+                        await ScanLimiter.RunGameAsync(async () =>
+                        {
                     if (Program.Canceled)
                         return;
                     HashSet<string> dllDirectories = await directory.GetDllDirectoriesFromGameDirectory(Platform.Epic);
@@ -588,6 +594,12 @@ internal sealed partial class MainForm : CustomForm
                     if (Program.Canceled)
                         return;
                     RemoveFromRemainingGames(name);
+                        }, Program.CancellationToken);
+                    }
+                    catch (OperationCanceledException)
+                    {
+                        RemoveFromRemainingGames(name);
+                    }
                 });
                 appTasks.Add(task);
             }
@@ -629,6 +641,10 @@ internal sealed partial class MainForm : CustomForm
                 AddToRemainingGames(name);
                 Task task = Task.Run(async () =>
                 {
+                    try
+                    {
+                        await ScanLimiter.RunGameAsync(async () =>
+                        {
                     if (Program.Canceled)
                         return;
                     HashSet<string> dllDirectories =
@@ -666,6 +682,12 @@ internal sealed partial class MainForm : CustomForm
                     if (Program.Canceled)
                         return;
                     RemoveFromRemainingGames(name);
+                        }, Program.CancellationToken);
+                    }
+                    catch (OperationCanceledException)
+                    {
+                        RemoveFromRemainingGames(name);
+                    }
                 });
                 appTasks.Add(task);
             }

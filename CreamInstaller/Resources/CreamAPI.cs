@@ -38,29 +38,8 @@ internal static class CreamAPI
 
         try
         {
-            List<(string id, string name)> dlcEntries = [];
             string[] lines = File.ReadAllLines(config, Encoding.Default);
-            bool inDlcSection = false;
-            foreach (string line in lines)
-            {
-                string trimmed = line.Trim();
-                if (trimmed.StartsWith("[dlc]", StringComparison.OrdinalIgnoreCase))
-                {
-                    inDlcSection = true;
-                    continue;
-                }
-                if (inDlcSection && trimmed.StartsWith("["))
-                    break;
-                if (inDlcSection && trimmed.Contains('='))
-                {
-                    string[] parts = trimmed.Split('=', 2);
-                    string id = parts[0].Trim();
-                    string name = parts.Length > 1 ? parts[1].Trim() : "Unknown";
-                    if (!string.IsNullOrEmpty(id))
-                        dlcEntries.Add((id, name));
-                }
-            }
-
+            List<(string id, string name)> dlcEntries = ParseConfigDlcLines(lines);
             ProgramData.Log.Info($"[CreamAPI] Read config: {config} — {dlcEntries.Count} DLC", LogDestination.Unlocker);
             return dlcEntries;
         }
@@ -69,6 +48,34 @@ internal static class CreamAPI
             ProgramData.Log.Error($"[CreamAPI] Error reading config: {config}", e);
             return null;
         }
+    }
+
+    /// <summary>Parses <c>[dlc]</c> id=name pairs from a cream_api.ini body.</summary>
+    internal static List<(string id, string name)> ParseConfigDlcLines(IEnumerable<string> lines)
+    {
+        List<(string id, string name)> dlcEntries = [];
+        bool inDlcSection = false;
+        foreach (string line in lines)
+        {
+            string trimmed = line.Trim();
+            if (trimmed.StartsWith("[dlc]", StringComparison.OrdinalIgnoreCase))
+            {
+                inDlcSection = true;
+                continue;
+            }
+            if (inDlcSection && trimmed.StartsWith('['))
+                break;
+            if (inDlcSection && trimmed.Contains('='))
+            {
+                string[] parts = trimmed.Split('=', 2);
+                string id = parts[0].Trim();
+                string name = parts.Length > 1 ? parts[1].Trim() : "Unknown";
+                if (!string.IsNullOrEmpty(id))
+                    dlcEntries.Add((id, name));
+            }
+        }
+
+        return dlcEntries;
     }
 
     private static void CheckConfig(string directory, Selection selection, InstallForm installForm = null)
@@ -169,35 +176,8 @@ internal static class CreamAPI
 
             directory.GetCreamApiComponents(out string api32, out string api32_o, out string api64, out string api64_o,
                 out string config);
-            if (api32_o.FileExists())
-            {
-                if (api32.FileExists())
-                {
-                    api32.DeleteFile(true);
-                    installForm?.UpdateUser($"Deleted CreamAPI: {Path.GetFileName(api32)}", LogTextBox.Action, false);
-                }
-
-                api32_o.MoveFile(api32!);
-                installForm?.UpdateUser(
-                    $"Restored Steamworks: {Path.GetFileName(api32_o)} -> {Path.GetFileName(api32)}", LogTextBox.Action,
-                    false);
-                ProgramData.Log.Info($"[CreamAPI] Restored original steam_api.dll from backup", LogDestination.Unlocker);
-            }
-
-            if (api64_o.FileExists())
-            {
-                if (api64.FileExists())
-                {
-                    api64.DeleteFile(true);
-                    installForm?.UpdateUser($"Deleted CreamAPI: {Path.GetFileName(api64)}", LogTextBox.Action, false);
-                }
-
-                api64_o.MoveFile(api64!);
-                installForm?.UpdateUser(
-                    $"Restored Steamworks: {Path.GetFileName(api64_o)} -> {Path.GetFileName(api64)}", LogTextBox.Action,
-                    false);
-                ProgramData.Log.Info($"[CreamAPI] Restored original steam_api64.dll from backup", LogDestination.Unlocker);
-            }
+            SteamworksDllInstaller.UninstallSteamApiPair(api32, api32_o, api64, api64_o, installForm, "CreamAPI",
+                "CreamAPI");
 
             if (!deleteOthers)
             {
@@ -225,33 +205,8 @@ internal static class CreamAPI
 
             directory.GetCreamApiComponents(out string api32, out string api32_o, out string api64, out string api64_o,
                 out _);
-            if (api32.FileExists() && !api32_o.FileExists())
-            {
-                api32.MoveFile(api32_o!, true);
-                installForm?.UpdateUser($"Renamed Steamworks: {Path.GetFileName(api32)} -> {Path.GetFileName(api32_o)}",
-                    LogTextBox.Action, false);
-                ProgramData.Log.Info($"[CreamAPI] Backed up steam_api.dll -> steam_api_o.dll", LogDestination.Unlocker);
-            }
-
-            if (api32_o.FileExists())
-            {
-                "CreamAPI.steam_api.dll".WriteManifestResource(api32);
-                installForm?.UpdateUser($"Wrote CreamAPI: {Path.GetFileName(api32)}", LogTextBox.Action, false);
-            }
-
-            if (api64.FileExists() && !api64_o.FileExists())
-            {
-                api64.MoveFile(api64_o!, true);
-                installForm?.UpdateUser($"Renamed Steamworks: {Path.GetFileName(api64)} -> {Path.GetFileName(api64_o)}",
-                    LogTextBox.Action, false);
-            }
-
-            if (api64_o.FileExists())
-            {
-                "CreamAPI.steam_api64.dll".WriteManifestResource(api64);
-                installForm?.UpdateUser($"Wrote CreamAPI: {Path.GetFileName(api64)}", LogTextBox.Action, false);
-                ProgramData.Log.Info($"[CreamAPI] Wrote 64-bit CreamAPI DLL to: {api64}", LogDestination.Unlocker);
-            }
+            SteamworksDllInstaller.InstallSteamApiPair(api32, api32_o, api64, api64_o,
+                "CreamAPI.steam_api.dll", "CreamAPI.steam_api64.dll", installForm, "CreamAPI", "CreamAPI");
 
             if (generateConfig)
             {

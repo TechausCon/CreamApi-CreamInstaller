@@ -99,10 +99,12 @@ internal class CustomForm : Form
           + "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
           + "🙌  COMMUNITY SUPPORT  (NO OFFICIAL SUPPORT IS PROVIDED)\n"
           + $"• GitHub Discussions → [{discussions}]({discussions})\n"
-          + $"• ubden Forum        → [{forum}]({forum})\n\n"
+          + $"• GitHub Issues      → [{forum}]({forum})\n\n"
           + "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
-          + $"🚨  Report abuse / misuse: [{abuse}](mailto:{abuse})\n"
-          + $"💙  Support the community: [{donate}]({donate})\n"
+          + (string.IsNullOrWhiteSpace(donate)
+              ? $"🚨  Report abuse / misuse: [{abuse}]({abuse})\n"
+              : $"🚨  Report abuse / misuse: [{abuse}]({abuse})\n"
+                + $"💙  Support the community: [{donate}]({donate})\n")
           + $"📁  Source code: [{repository}]({repository})\n");
     }
 

@@ -48,4 +48,8 @@ public class Asset
 
     [JsonProperty("browser_download_url", NullValueHandling = NullValueHandling.Ignore)]
     public string BrowserDownloadUrl { get; set; }
+
+    /// <summary>GitHub release asset digest, typically "sha256:&lt;hex&gt;".</summary>
+    [JsonProperty("digest", NullValueHandling = NullValueHandling.Ignore)]
+    public string Digest { get; set; }
 }

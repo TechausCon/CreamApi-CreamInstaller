@@ -27,7 +27,7 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore CreamInstaller/CreamInstaller.csproj
 
-      - name: Publish (self-contained single file)
+      - name: Publish (framework-dependent single file)
         run: |
           dotnet publish CreamInstaller/CreamInstaller.csproj `
             -c Release `
@@ -35,11 +35,15 @@ jobs:
             --self-contained false `
             -p:PublishSingleFile=true `
             -p:IncludeAllContentForSelfExtract=true `
+            -p:EnableCompressionInSingleFile=false `
             -o publish/
 
       - name: Create release archive
         run: |
           Compress-Archive -Path publish/CreamInstaller.exe -DestinationPath CreamInstaller.zip
+          $hash = (Get-FileHash CreamInstaller.zip -Algorithm SHA256).Hash.ToLowerInvariant()
+          "sha256:$hash" | Set-Content CreamInstaller.zip.sha256.txt
+          echo "ZIP_SHA256=$hash" >> $env:GITHUB_ENV
 
       - name: Extract version from tag
         id: version
@@ -51,7 +55,9 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           name: "CreamInstaller ${{ steps.version.outputs.tag }}"
-          files: CreamInstaller.zip
+          files: |
+            CreamInstaller.zip
+            CreamInstaller.zip.sha256.txt
           generate_release_notes: true
           body: |
             ## CreamInstaller ${{ steps.version.outputs.tag }}
@@ -59,10 +65,13 @@ jobs:
             ### Download
             Download `CreamInstaller.zip`, extract and run `CreamInstaller.exe`.
 
+            ### Integrity
+            SHA-256 of `CreamInstaller.zip`: `${{ env.ZIP_SHA256 }}`
+
             ### Requirements
             - Windows 10/11 (x64)
             - [.NET 9 Desktop Runtime](https://dotnet.microsoft.com/en-us/download/dotnet/9.0)
 
             ---
             > ⚠️ This software is for **educational purposes only**. No official support is provided.
-            > For community support, visit [GitHub Discussions](https://github.com/ubden/CreamApi-CreamInstaller/discussions) or the [ubden Forum](https://forum.ubden.com.tr/konu/creaminstaller-auto-dlc-unlocker-installer-config-gen.1602/).
+            > For community support, visit [GitHub Discussions](https://github.com/TechausCon/CreamApi-CreamInstaller/discussions) or [Issues](https://github.com/TechausCon/CreamApi-CreamInstaller/issues).

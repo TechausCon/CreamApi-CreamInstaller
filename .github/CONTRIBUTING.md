@@ -21,7 +21,7 @@ Thank you for your interest in contributing! This project is open-source and com
 
 ### Build
 ```bash
-git clone https://github.com/ubden-community/CreamApi-CreamInstaller.git
+git clone https://github.com/TechausCon/CreamApi-CreamInstaller.git
 cd CreamApi-CreamInstaller
 dotnet build CreamInstaller/CreamInstaller.csproj -c Debug
 ```
@@ -56,8 +56,8 @@ Use the [Enhancement Request](.github/ISSUE_TEMPLATE/enhancement-request.md) tem
 
 ## 💬 Community
 
-- [GitHub Discussions](https://github.com/ubden/CreamApi-CreamInstaller/discussions)
-- [ubden Forum](https://forum.ubden.com.tr/konu/creaminstaller-auto-dlc-unlocker-installer-config-gen.1602/)
+- [GitHub Discussions](https://github.com/TechausCon/CreamApi-CreamInstaller/discussions)
+- [GitHub Issues](https://github.com/TechausCon/CreamApi-CreamInstaller/issues)
 
 ---
 

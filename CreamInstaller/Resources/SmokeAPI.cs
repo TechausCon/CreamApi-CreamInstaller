@@ -259,35 +259,8 @@ internal static class SmokeAPI
 
             directory.GetSmokeApiComponents(out string api32, out string api32_o, out string api64, out string api64_o,
                 out string old_config, out string config, out string old_log, out string log, out string cache);
-            if (api32_o.FileExists())
-            {
-                if (api32.FileExists())
-                {
-                    api32.DeleteFile(true);
-                    installForm?.UpdateUser($"Deleted SmokeAPI: {Path.GetFileName(api32)}", LogTextBox.Action, false);
-                }
-
-                api32_o.MoveFile(api32!);
-                installForm?.UpdateUser(
-                    $"Restored Steamworks: {Path.GetFileName(api32_o)} -> {Path.GetFileName(api32)}", LogTextBox.Action,
-                    false);
-                ProgramData.Log.Info($"[SmokeAPI] Restored original steam_api.dll from backup", LogDestination.Unlocker);
-            }
-
-            if (api64_o.FileExists())
-            {
-                if (api64.FileExists())
-                {
-                    api64.DeleteFile(true);
-                    installForm?.UpdateUser($"Deleted SmokeAPI: {Path.GetFileName(api64)}", LogTextBox.Action, false);
-                }
-
-                api64_o.MoveFile(api64!);
-                installForm?.UpdateUser(
-                    $"Restored Steamworks: {Path.GetFileName(api64_o)} -> {Path.GetFileName(api64)}", LogTextBox.Action,
-                    false);
-                ProgramData.Log.Info($"[SmokeAPI] Restored original steam_api64.dll from backup", LogDestination.Unlocker);
-            }
+            SteamworksDllInstaller.UninstallSteamApiPair(api32, api32_o, api64, api64_o, installForm, "SmokeAPI",
+                "SmokeAPI");
 
             if (!deleteOthers)
             {
@@ -342,35 +315,8 @@ internal static class SmokeAPI
 
             directory.GetSmokeApiComponents(out string api32, out string api32_o, out string api64, out string api64_o,
                 out _, out _, out _, out _, out _);
-            if (api32.FileExists() && !api32_o.FileExists())
-            {
-                api32.MoveFile(api32_o!, true);
-                installForm?.UpdateUser($"Renamed Steamworks: {Path.GetFileName(api32)} -> {Path.GetFileName(api32_o)}",
-                    LogTextBox.Action, false);
-                ProgramData.Log.Info($"[SmokeAPI] Backed up steam_api.dll -> steam_api_o.dll", LogDestination.Unlocker);
-            }
-
-            if (api32_o.FileExists())
-            {
-                "SmokeAPI.steam_api.dll".WriteManifestResource(api32);
-                installForm?.UpdateUser($"Wrote SmokeAPI: {Path.GetFileName(api32)}", LogTextBox.Action, false);
-                ProgramData.Log.Info($"[SmokeAPI] Wrote 32-bit SmokeAPI DLL", LogDestination.Unlocker);
-            }
-
-            if (api64.FileExists() && !api64_o.FileExists())
-            {
-                api64.MoveFile(api64_o!, true);
-                installForm?.UpdateUser($"Renamed Steamworks: {Path.GetFileName(api64)} -> {Path.GetFileName(api64_o)}",
-                    LogTextBox.Action, false);
-                ProgramData.Log.Info($"[SmokeAPI] Backed up steam_api64.dll -> steam_api64_o.dll", LogDestination.Unlocker);
-            }
-
-            if (api64_o.FileExists())
-            {
-                "SmokeAPI.steam_api64.dll".WriteManifestResource(api64);
-                installForm?.UpdateUser($"Wrote SmokeAPI: {Path.GetFileName(api64)}", LogTextBox.Action, false);
-                ProgramData.Log.Info($"[SmokeAPI] Wrote 64-bit SmokeAPI DLL", LogDestination.Unlocker);
-            }
+            SteamworksDllInstaller.InstallSteamApiPair(api32, api32_o, api64, api64_o,
+                "SmokeAPI.steam_api.dll", "SmokeAPI.steam_api64.dll", installForm, "SmokeAPI", "SmokeAPI");
 
             if (generateConfig)
             {
