@@ -22,14 +22,14 @@ internal static class Program
             ? index
             : Application.ProductVersion.Length)];
 
-    internal const string RepositoryOwner = "ubden-community";
+    internal const string RepositoryOwner = "TechausCon";
     internal static readonly string RepositoryName = "CreamApi-CreamInstaller";
     internal static readonly string RepositoryPackage = Name + ".zip";
     internal static readonly string RepositoryExecutable = Name + ".exe";
-    internal const string CommunityDiscussions = "https://github.com/ubden/CreamApi-CreamInstaller/discussions";
-    internal const string CommunityForum = "https://forum.ubden.com.tr/konu/creaminstaller-auto-dlc-unlocker-installer-config-gen.1602/";
-    internal const string AbuseEmail = "abuse@ubden.com";
-    internal const string DonateUrl = "https://ubd.one/donate";
+    internal const string CommunityDiscussions = "https://github.com/TechausCon/CreamApi-CreamInstaller/discussions";
+    internal const string CommunityForum = "https://github.com/TechausCon/CreamApi-CreamInstaller/issues";
+    internal const string AbuseEmail = "https://github.com/TechausCon/CreamApi-CreamInstaller/security/advisories/new";
+    internal const string DonateUrl = "";
 #if DEBUG
     internal static readonly string ApplicationName = Name + " v" + Version + "-debug: " + Description;
     internal static readonly string ApplicationNameShort = Name + " v" + Version + "-debug";
@@ -92,40 +92,45 @@ internal static class Program
     private static void Main()
     {
         using Mutex mutex = new(true, Name, out bool createdNew);
-        if (createdNew)
+        if (!createdNew)
         {
-            _ = Application.SetHighDpiMode(HighDpiMode.SystemAware);
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.ApplicationExit += OnApplicationExit;
-            Application.ThreadException += (_, e) => e.Exception.HandleFatalException();
-            Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
-            AppDomain.CurrentDomain.UnhandledException +=
-                (_, e) => (e.ExceptionObject as Exception)?.HandleFatalException();
-            bool retry = true;
-            while (retry)
+            _ = MessageBox.Show(
+                $"{Name} is already running.\n\nClose the other instance first, then try again.",
+                Name, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            return;
+        }
+
+        _ = Application.SetHighDpiMode(HighDpiMode.SystemAware);
+        Application.EnableVisualStyles();
+        Application.SetCompatibleTextRenderingDefault(false);
+        Application.ApplicationExit += OnApplicationExit;
+        Application.ThreadException += (_, e) => e.Exception.HandleFatalException();
+        Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
+        AppDomain.CurrentDomain.UnhandledException +=
+            (_, e) => (e.ExceptionObject as Exception)?.HandleFatalException();
+        bool retry = true;
+        while (retry)
+        {
+            try
             {
-                try
-                {
-                    HttpClientManager.Setup();
-                    AppSettings = ProgramData.LoadSettings(); // load persisted settings
-                    using UpdateForm form = new();
+                HttpClientManager.Setup();
+                AppSettings = ProgramData.LoadSettings(); // load persisted settings
+                using UpdateForm form = new();
 #if DEBUG
-                    DebugForm.Current.Attach(form);
+                DebugForm.Current.Attach(form);
 #endif
-                    // Apply initial theme (dark by default)
-                    Utility.ThemeManager.Apply(form);
-                    Application.Run(form);
-                    retry = false;
-                }
-                catch (Exception e)
+                // Apply initial theme (dark by default)
+                Utility.ThemeManager.Apply(form);
+                Application.Run(form);
+                retry = false;
+            }
+            catch (Exception e)
+            {
+                retry = e.HandleException();
+                if (!retry)
                 {
-                    retry = e.HandleException();
-                    if (!retry)
-                    {
-                        Application.Exit();
-                        return;
-                    }
+                    Application.Exit();
+                    return;
                 }
             }
         }
@@ -133,7 +138,54 @@ internal static class Program
         mutex.Close();
     }
 
-    internal static bool Canceled;
+    private static CancellationTokenSource operationCts = new();
+
+    /// <summary>
+    /// Token for the current scan/install operation. Prefer this over polling <see cref="Canceled"/>.
+    /// </summary>
+    internal static CancellationToken CancellationToken => operationCts.Token;
+
+    /// <summary>
+    /// Legacy cancellation flag backed by <see cref="CancellationTokenSource"/>.
+    /// Assigning <c>false</c> resets the token for a new operation; assigning <c>true</c> cancels.
+    /// </summary>
+    internal static bool Canceled
+    {
+        get => operationCts.IsCancellationRequested;
+        set
+        {
+            if (value)
+                CancelOperations();
+            else
+                ResetCancellation();
+        }
+    }
+
+    internal static void CancelOperations()
+    {
+        try
+        {
+            operationCts.Cancel();
+        }
+        catch (ObjectDisposedException)
+        {
+            // ignored
+        }
+    }
+
+    internal static void ResetCancellation()
+    {
+        CancellationTokenSource next = new();
+        CancellationTokenSource previous = Interlocked.Exchange(ref operationCts, next);
+        try
+        {
+            previous.Dispose();
+        }
+        catch (ObjectDisposedException)
+        {
+            // ignored
+        }
+    }
 
     /// <summary>
     /// Initiates application cleanup asynchronously. Use this when you can await the result.
@@ -143,7 +195,7 @@ internal static class Program
     internal static async Task CleanupAsync(bool cancel = true)
     {
         if (cancel)
-            Canceled = true;
+            CancelOperations();
         await SteamCMD.Cleanup();
     }
 
@@ -155,7 +207,7 @@ internal static class Program
     internal static void Cleanup(bool cancel = true)
     {
         if (cancel)
-            Canceled = true;
+            CancelOperations();
 
         // Fire and forget - don't block synchronous callers
         // Any exceptions will be logged but won't crash the app
@@ -174,7 +226,7 @@ internal static class Program
 
     private static void OnApplicationExit(object? s, EventArgs e)
     {
-        Canceled = true;
+        CancelOperations();
 
         // For application exit, we should try to wait briefly for cleanup
         try

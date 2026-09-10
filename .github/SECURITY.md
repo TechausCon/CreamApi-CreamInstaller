@@ -16,7 +16,7 @@ If you discover a security vulnerability in this project, **do not open a public
 
 Instead, please report it confidentially to:
 
-📧 **[abuse@ubden.com](mailto:abuse@ubden.com)**
+📧 **[https://github.com/TechausCon/CreamApi-CreamInstaller/security/advisories/new](github.com/TechausCon/CreamApi-CreamInstaller/security/advisories/new)**
 
 Please include:
 - A description of the vulnerability

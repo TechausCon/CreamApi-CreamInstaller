@@ -8,7 +8,7 @@ body:
         Ask the community for help. Please be as specific as possible.
 
         > ⚠️ **No official support is provided.** This is community-only support.
-        > You can also ask at the [ubden Forum](https://forum.ubden.com.tr/konu/creaminstaller-auto-dlc-unlocker-installer-config-gen.1602/).
+        > You can also ask at the [GitHub Issues](https://github.com/TechausCon/CreamApi-CreamInstaller/issues).
 
   - type: input
     id: version
@@ -38,7 +38,7 @@ body:
     attributes:
       label: Before asking
       options:
-        - label: I have read the [README](https://github.com/ubden-community/CreamApi-CreamInstaller/blob/main/README.md) fully
+        - label: I have read the [README](https://github.com/TechausCon/CreamApi-CreamInstaller/blob/main/README.md) fully
           required: true
         - label: I have searched existing issues and discussions
           required: true

@@ -209,6 +209,29 @@ internal sealed partial class UpdateForm : CustomForm
             cancellation?.Dispose();
             cancellation = null;
             await update.DisposeAsync();
+
+            if (success && !Program.Canceled
+                && Hashing.TryParseSha256Digest(latestRelease.Asset.Digest, out string expectedSha256))
+            {
+                progressLabel.Text = "Verifying download . . .";
+                string actualSha256 = await Hashing.ComputeSha256HexAsync(PackagePath);
+                if (!string.Equals(actualSha256, expectedSha256, StringComparison.OrdinalIgnoreCase))
+                {
+                    PackagePath.DeleteFile(true);
+                    success = false;
+                    _ = MessageBox.Show(this,
+                        "Update package failed SHA-256 verification and was discarded.\n\n"
+                        + $"Expected: {expectedSha256}\nActual:   {actualSha256}",
+                        Program.Name, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    ProgramData.Log.Error(
+                        $"Update SHA-256 mismatch. expected={expectedSha256} actual={actualSha256}");
+                }
+            }
+            else if (success && string.IsNullOrWhiteSpace(latestRelease.Asset.Digest))
+            {
+                ProgramData.Log.Warn("Release asset has no digest; skipping SHA-256 verification");
+            }
+
             bool canContinue = success && !Program.Canceled;
             if (canContinue)
                 updateButton.Enabled = false;

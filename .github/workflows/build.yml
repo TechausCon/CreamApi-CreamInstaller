@@ -23,13 +23,16 @@ jobs:
           dotnet-version: '9.x'
 
       - name: Restore dependencies
-        run: dotnet restore CreamInstaller/CreamInstaller.csproj
+        run: dotnet restore CreamInstaller.sln
 
       - name: Build (Release)
-        run: dotnet build CreamInstaller/CreamInstaller.csproj -c Release --no-restore
+        run: dotnet build CreamInstaller.sln -c Release --no-restore
+
+      - name: Test
+        run: dotnet test CreamInstaller.sln -c Release --no-build --verbosity normal
 
       - name: Check code formatting
-        run: dotnet format CreamInstaller/CreamInstaller.csproj --verify-no-changes --severity info
+        run: dotnet format CreamInstaller/CreamInstaller.csproj --verify-no-changes --severity warn
         continue-on-error: true
 
       - name: Upload build artifact

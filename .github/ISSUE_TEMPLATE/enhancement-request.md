@@ -8,8 +8,8 @@ assignees: ''
 ----
 
 > 💡 **Have an idea?** You can also discuss it in the community first:
-> - [GitHub Discussions](https://github.com/ubden/CreamApi-CreamInstaller/discussions)
-> - [ubden Forum](https://forum.ubden.com.tr/konu/creaminstaller-auto-dlc-unlocker-installer-config-gen.1602/)
+> - [GitHub Discussions](https://github.com/TechausCon/CreamApi-CreamInstaller/discussions)
+> - [GitHub Issues](https://github.com/TechausCon/CreamApi-CreamInstaller/issues)
 
 ---
 

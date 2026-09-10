@@ -12,8 +12,8 @@ For questions, troubleshooting, and discussions, please use the community channe
 
 | Channel | Link |
 |---------|------|
-| **GitHub Discussions** | [github.com/ubden/CreamApi-CreamInstaller/discussions](https://github.com/ubden/CreamApi-CreamInstaller/discussions) |
-| **ubden Community Forum** | [forum.ubden.com.tr](https://forum.ubden.com.tr/konu/creaminstaller-auto-dlc-unlocker-installer-config-gen.1602/) |
+| **GitHub Discussions** | [github.com/TechausCon/CreamApi-CreamInstaller/discussions](https://github.com/TechausCon/CreamApi-CreamInstaller/discussions) |
+| **GitHub Issues** | [forum.ubden.com.tr](https://github.com/TechausCon/CreamApi-CreamInstaller/issues) |
 
 > Community members and contributors may be able to help, but responses are not guaranteed.
 
@@ -21,7 +21,7 @@ For questions, troubleshooting, and discussions, please use the community channe
 
 ## 🐛 Bug Reports
 
-If you believe you've found a bug, please open an [Issue](https://github.com/ubden-community/CreamApi-CreamInstaller/issues) using the appropriate template.
+If you believe you've found a bug, please open an [Issue](https://github.com/TechausCon/CreamApi-CreamInstaller/issues) using the appropriate template.
 
 Before reporting, please:
 - Check if the issue already exists
@@ -33,4 +33,4 @@ Before reporting, please:
 ## 🚨 Report Abuse
 
 To report abuse or misuse of this software:  
-📧 **[abuse@ubden.com](mailto:abuse@ubden.com)**
+📧 **[https://github.com/TechausCon/CreamApi-CreamInstaller/security/advisories/new](github.com/TechausCon/CreamApi-CreamInstaller/security/advisories/new)**

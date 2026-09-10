@@ -17,8 +17,8 @@ This project interacts with DLL files, which causes antivirus programs to flag i
 - This is documented in [Springer – International Journal of Information Security (2024)](https://link.springer.com/article/10.1007/s10207-024-00836-w).
 
 **Community discussion:**
-- [GitHub Discussions](https://github.com/ubden/CreamApi-CreamInstaller/discussions)
-- [ubden Forum](https://forum.ubden.com.tr/konu/creaminstaller-auto-dlc-unlocker-installer-config-gen.1602/)
+- [GitHub Discussions](https://github.com/TechausCon/CreamApi-CreamInstaller/discussions)
+- [GitHub Issues](https://github.com/TechausCon/CreamApi-CreamInstaller/issues)
 
 ---
 
@@ -32,4 +32,4 @@ Mamson.A!ac, Trojan:Win32/ and other
 Please review code line : "// ANTIVIRUS FALSE POSITIVE WARNING:" and folder /Resourcues
 
 #### VirusTotal link (optional)
-Check comments : https://github.com/ubden/CreamApi-CreamInstaller/discussions
+Check comments : https://github.com/TechausCon/CreamApi-CreamInstaller/discussions

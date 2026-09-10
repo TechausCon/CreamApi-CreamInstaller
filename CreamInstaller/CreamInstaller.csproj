@@ -27,6 +27,9 @@
         <Platforms>AnyCPU</Platforms>
 		<ForceDesignerDpiUnaware>true</ForceDesignerDpiUnaware>
     </PropertyGroup>
+    <ItemGroup>
+        <InternalsVisibleTo Include="CreamInstaller.Tests" />
+    </ItemGroup>
     <PropertyGroup Condition="'$(Configuration)'=='Release'">
         <AssemblyName>$(Company)</AssemblyName>
     </PropertyGroup>
@@ -155,7 +158,10 @@
         <PackageReference Include="Gameloop.Vdf" Version="0.6.2" />
         <PackageReference Include="Gameloop.Vdf.JsonConverter" Version="0.2.1" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-        <PackageReference Include="System.ServiceModel.Primitives" Version="8.0.0" />
+    </ItemGroup>
+    <ItemGroup>
+        <None Include="Resources\manifest.json" CopyToOutputDirectory="PreserveNewest" />
+        <None Include="Resources\THIRD_PARTY.md" CopyToOutputDirectory="PreserveNewest" />
     </ItemGroup>
     <ItemGroup>
         <Compile Update="Forms\DebugForm.cs">

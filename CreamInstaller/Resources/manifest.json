@@ -1,0 +1,272 @@
+[
+  {
+    "path": "CreamAPI/steam_api.dll",
+    "sha256": "23e91e44de1adbd0544a578ab80e46c968f9394e5b419240034a55a59b131675",
+    "bytes": 682856
+  },
+  {
+    "path": "CreamAPI/steam_api64.dll",
+    "sha256": "d00a9b72e696cf5c88a5b4bbc4d7d308f9bac51a8c4712d6b26cfd863938a25f",
+    "bytes": 732520
+  },
+  {
+    "path": "Koaloader/audioses-32/audioses.dll",
+    "sha256": "eec64f4aafdcad8828123165c5e82d7b5d65f64e9e9cfc9b4d399edf19052c31",
+    "bytes": 6425088
+  },
+  {
+    "path": "Koaloader/audioses-64/audioses.dll",
+    "sha256": "b4af8a96126f923221868db6e8dc77f91013facb3eae56491feac97d1fe62bee",
+    "bytes": 7307776
+  },
+  {
+    "path": "Koaloader/d3d10-32/d3d10.dll",
+    "sha256": "ff5be6f27aa710479517c280b458e01a72ab36281515f555ed0a82249f48a68c",
+    "bytes": 6427136
+  },
+  {
+    "path": "Koaloader/d3d10-64/d3d10.dll",
+    "sha256": "1c332fbec2a806bec813da505f42c0c2cefec7f21e49510ca7abed269cddb66e",
+    "bytes": 7309824
+  },
+  {
+    "path": "Koaloader/d3d11-32/d3d11.dll",
+    "sha256": "0842cf531bbb938b0d23b552a3ddc6337a4b7b107ec7873869ea2ddd22584d27",
+    "bytes": 6429184
+  },
+  {
+    "path": "Koaloader/d3d11-64/d3d11.dll",
+    "sha256": "79efa4720d7d079f334b25a7867963ff0696ffe7f6efa270be0f2e5b2518871f",
+    "bytes": 7311360
+  },
+  {
+    "path": "Koaloader/d3d9-32/d3d9.dll",
+    "sha256": "45e1b8518dde783deca217540efc79094bdb703f40b33f4a21f5693bbab689c3",
+    "bytes": 6426112
+  },
+  {
+    "path": "Koaloader/d3d9-64/d3d9.dll",
+    "sha256": "28fb7936dfee4cb09668dbfe38a59a491b8eb099271dafa1eb84f35deee01700",
+    "bytes": 7308288
+  },
+  {
+    "path": "Koaloader/dinput8-32/dinput8.dll",
+    "sha256": "f46b673e94de0b53185eb4b2cb65ff0595e941139012bcedee4235ae3d305d68",
+    "bytes": 6425088
+  },
+  {
+    "path": "Koaloader/dinput8-64/dinput8.dll",
+    "sha256": "38f4b6ad70627de19470bab93e1f3d540f72dd8fdb0e7a5eb2340c4ead9af581",
+    "bytes": 7307776
+  },
+  {
+    "path": "Koaloader/dwmapi-32/dwmapi.dll",
+    "sha256": "2e8a9e0cfdd11c9b40687093b2686f81a5ee5ed6a4cde9e4f6c0553f7c22a5e0",
+    "bytes": 6428160
+  },
+  {
+    "path": "Koaloader/dwmapi-64/dwmapi.dll",
+    "sha256": "2b99e04fcf9e1c2672bdbcdf7b663ee0eb1ff8eacf713b7a265a03045688876a",
+    "bytes": 7310848
+  },
+  {
+    "path": "Koaloader/dxgi-32/dxgi.dll",
+    "sha256": "649b6b99a8fd15dc1bd386f6960bf28eb4ec591556d1d92b682df07f4fdb8b7b",
+    "bytes": 6426112
+  },
+  {
+    "path": "Koaloader/dxgi-64/dxgi.dll",
+    "sha256": "e0ec8f6200c93e877ed73bb37fac108dc9586910fc116bf44a9d6e40056df730",
+    "bytes": 7308800
+  },
+  {
+    "path": "Koaloader/glu32-32/glu32.dll",
+    "sha256": "a32b9ba5e13927c1206e8e934243a76080d2203a45f38abbbd73dec5b5f76f80",
+    "bytes": 6428160
+  },
+  {
+    "path": "Koaloader/glu32-64/glu32.dll",
+    "sha256": "8a968ccdba304436e249ff3bce3222d86545130bd8c7afd1a9f309ba38c2ec75",
+    "bytes": 7310848
+  },
+  {
+    "path": "Koaloader/hid-32/hid.dll",
+    "sha256": "67296d2676de26002a9f828c577583eb509a8967eebfa078803d5c7be9bc6f0e",
+    "bytes": 6428160
+  },
+  {
+    "path": "Koaloader/hid-64/hid.dll",
+    "sha256": "3cc17c7e49253a70c24100b5b1ef982f80a0fb7133d738b7dbbf58dab1fda50b",
+    "bytes": 7310848
+  },
+  {
+    "path": "Koaloader/iphlpapi-32/iphlpapi.dll",
+    "sha256": "39cf4e6907b35d559861d10200bc4c55eed049acef4d9f9491deb9a05cf7953e",
+    "bytes": 6451712
+  },
+  {
+    "path": "Koaloader/iphlpapi-64/iphlpapi.dll",
+    "sha256": "6da50fa51c6adf62b436409060c0a273aa6733cbfc7a5c7ece46955f1f670a40",
+    "bytes": 7334400
+  },
+  {
+    "path": "Koaloader/msasn1-32/msasn1.dll",
+    "sha256": "b331b0831e37da74f1aabd120298417de8327606993a29373f30e326b6883cba",
+    "bytes": 6436352
+  },
+  {
+    "path": "Koaloader/msasn1-64/msasn1.dll",
+    "sha256": "5b2f977d92afef440f837dae1c5a9d1054403ede87d6dc18555b6810400b7034",
+    "bytes": 7319040
+  },
+  {
+    "path": "Koaloader/msimg32-32/msimg32.dll",
+    "sha256": "156af599a7556493d8e3fe73f30e4852f6d939a7a44ca574a9470dac1a4673ed",
+    "bytes": 6425088
+  },
+  {
+    "path": "Koaloader/msimg32-64/msimg32.dll",
+    "sha256": "700418d210dab9cc017688f934a666bda45b6cfd3669f9e8d79bb0807e3b231d",
+    "bytes": 7307264
+  },
+  {
+    "path": "Koaloader/mswsock-32/mswsock.dll",
+    "sha256": "03e127e12bba23b6bd68a1af021db1c8399d442a53034547c6f1cf03d1058f71",
+    "bytes": 6429696
+  },
+  {
+    "path": "Koaloader/mswsock-64/mswsock.dll",
+    "sha256": "fe0ae4be6af3f9647188f1a34d72da88a6b575889fceab038090440c9a29e018",
+    "bytes": 7312384
+  },
+  {
+    "path": "Koaloader/opengl32-32/opengl32.dll",
+    "sha256": "c03afd69c6649eeab6e1ee4aa26288941c0683af4219c20306da03068c3cce48",
+    "bytes": 6448640
+  },
+  {
+    "path": "Koaloader/opengl32-64/opengl32.dll",
+    "sha256": "fc75e4464cae72d1fca66ee9de758699e7abb9f0b135592c4616f9d4c40cf3c6",
+    "bytes": 7331328
+  },
+  {
+    "path": "Koaloader/profapi-32/profapi.dll",
+    "sha256": "9af79af331f10581c49201dbaf4519a79deebc0aeae8c0b1e6a9d4da572f5489",
+    "bytes": 6424576
+  },
+  {
+    "path": "Koaloader/profapi-64/profapi.dll",
+    "sha256": "124ef0a372109e5819d1da3a5678a38ac9bf6ed6612e82b8611b02d54ba13c83",
+    "bytes": 7307264
+  },
+  {
+    "path": "Koaloader/propsys-32/propsys.dll",
+    "sha256": "e6d01bca9aa67f85a77571880e03925dc960034111576787fdc66251bf57b750",
+    "bytes": 6444544
+  },
+  {
+    "path": "Koaloader/propsys-64/propsys.dll",
+    "sha256": "403479dc7abd5b4068203075b371dc4e0cef44d084261f1bd79872539f8bc9e3",
+    "bytes": 7327232
+  },
+  {
+    "path": "Koaloader/textshaping-32/textshaping.dll",
+    "sha256": "4c4bfe56a74de93d0c0eb0469b2a4e47ab92dfe27897916be4bd744f7d6fb70a",
+    "bytes": 6426624
+  },
+  {
+    "path": "Koaloader/textshaping-64/textshaping.dll",
+    "sha256": "4b24af84f89e15a52951548b7cd22ad64391292f0c97cb8bf8d7562b59a2297c",
+    "bytes": 7308800
+  },
+  {
+    "path": "Koaloader/version-32/version.dll",
+    "sha256": "71497c425056f8e2597737dfb78fd3aaa62cd2baa5513d48f9bf1ad102b17913",
+    "bytes": 6426112
+  },
+  {
+    "path": "Koaloader/version-64/version.dll",
+    "sha256": "30a4960bb8257c7b1ff756d42b498a495179493adbd2591752c07fd0bfc2e509",
+    "bytes": 7308288
+  },
+  {
+    "path": "Koaloader/winhttp-32/winhttp.dll",
+    "sha256": "36d64bf1d713f0ff564b71563da5f0ff2eac7926151bf071986be29c2aa62548",
+    "bytes": 6432768
+  },
+  {
+    "path": "Koaloader/winhttp-64/winhttp.dll",
+    "sha256": "bdda03112340e6b816dd60e12858f8c01003ebaa3b04e7f148f615208c1c0c56",
+    "bytes": 7315456
+  },
+  {
+    "path": "Koaloader/winmm-32/winmm.dll",
+    "sha256": "e2764ab02fc3e33a7b6a4aa5c2a19496fc9409ed8ae0e8fdacc8504c2a64181f",
+    "bytes": 6437888
+  },
+  {
+    "path": "Koaloader/winmm-64/winmm.dll",
+    "sha256": "af689147cb1b9254b8246b62ab5758245dfec4c6084f03e66f9e0bf9a248aab7",
+    "bytes": 7319552
+  },
+  {
+    "path": "Koaloader/wldp-32/wldp.dll",
+    "sha256": "b3ac4127b21ab81cb69853066929fa06355799fa80a0b5f9e1d731d26ef70bb9",
+    "bytes": 6427648
+  },
+  {
+    "path": "Koaloader/wldp-64/wldp.dll",
+    "sha256": "92f96db14116bfc329e149c2976b5e874a4b03abe50e5ae5a80cb2cbb584ae16",
+    "bytes": 7310336
+  },
+  {
+    "path": "Koaloader/xinput9_1_0-32/xinput9_1_0.dll",
+    "sha256": "bc2ef920ce47dd33833551f8af6960515b1b5aba19fa20e48b4e6ce0cf3887a5",
+    "bytes": 6425088
+  },
+  {
+    "path": "Koaloader/xinput9_1_0-64/xinput9_1_0.dll",
+    "sha256": "113102a0f9293ebf4ba2a8a948a098ba8ce960e630f40722d22dd9db61265539",
+    "bytes": 7307776
+  },
+  {
+    "path": "ScreamAPI/EOSSDK-Win32-Shipping.dll",
+    "sha256": "753c8a59feaad29e110810dabcbd823e88ab9828996cb9bc3787679059f0182b",
+    "bytes": 6607360
+  },
+  {
+    "path": "ScreamAPI/EOSSDK-Win64-Shipping.dll",
+    "sha256": "a4b238e5b96186e37cdf4c4382ed0b45c2990593e23222c2b1399b99aac1b5f4",
+    "bytes": 7499776
+  },
+  {
+    "path": "SmokeAPI/steam_api.dll",
+    "sha256": "145aadfffde5140991995d76dca8f2423e9d7f9dbb66bc21565cee59746f027b",
+    "bytes": 3526144
+  },
+  {
+    "path": "SmokeAPI/steam_api64.dll",
+    "sha256": "3891cd70b8e06cad474b9ea5b6d7c3d19b9948c41df2495e3cf02d2a256498ef",
+    "bytes": 4204032
+  },
+  {
+    "path": "UplayR1/uplay_r1_loader.dll",
+    "sha256": "5758febb50908ada33fc460ed14f2dfee15dee42fe7cfb561540e6f2049bbb02",
+    "bytes": 2907648
+  },
+  {
+    "path": "UplayR1/uplay_r1_loader64.dll",
+    "sha256": "f83c5663f73c9310d6ce932094a7aee06fdbab8aaf7a445a60b29529070174b2",
+    "bytes": 3359232
+  },
+  {
+    "path": "UplayR2/upc_r2_loader.dll",
+    "sha256": "1d5a764134098691af20373576f8b8fcad8181f744cbbe084b4767bc71af9292",
+    "bytes": 6674432
+  },
+  {
+    "path": "UplayR2/upc_r2_loader64.dll",
+    "sha256": "4f676ad21c59c1b03e040dfce133d04cf836a99349bfe73cb778cba0465b910c",
+    "bytes": 8138240
+  }
+]
